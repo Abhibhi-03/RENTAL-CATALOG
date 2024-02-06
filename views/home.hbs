@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <form action="/search" method="post">
+            <label id="abhi">Abhi's Rentals</label>
+    <header>
+        <input type="text" name="search" placeholder="Enter Keyword" id="searchplace">
+        <button type="submit">Search</button>
+    </header>
+    </form>
+
+    <section>
+        <form action="modify-results" method="POST">
+        <h1 id="rentalCat">Rental Catalogue</h1>
+        <div>
+        <label id="modify">Modify Results: </label>
+
+        <select name="modifyResults">
+            <option value="">Choose an option</option>
+            <option value="availableItems">Items available for rent</option>
+            <option value="rentedItems">Items rented by you</option>
+        </select>
+        <button type = "submit" id="updateButton">Update</button>
+        </div>
+        </form>
+
+        <form id="returnButton" action="returnAllItems" method="POST">
+            <button>Return All Items</button>
+        </form>
+    </section>
+
+    <main>
+        {{#each item}}
+        <section id="itemCatalog">
+            <h1>{{this.item}}</h1>
+            <img src={{this.img}}>
+            {{#if this.forRent}}
+            <form action="rentItem" method="POST">
+                <button type="submit "name="rentedItems" value={{this.item}}>Rent</button>
+            </form>
+            {{else}}
+                <p>This item has aready been rented.</p>
+            {{/if}}
+        </section>
+        {{/each}}
+    </main> 
+</body>
+</html>
